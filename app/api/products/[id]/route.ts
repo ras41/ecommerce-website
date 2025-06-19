@@ -1,8 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import type { Product } from "@/types/product"
 
-// In-memory storage for demo purposes
-// This should match the products array from the main route
 const products: Product[] = [
   {
     id: "1",

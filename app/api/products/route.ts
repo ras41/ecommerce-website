@@ -1,8 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import type { Product, CreateProductRequest } from "@/types/product"
 
-// In-memory storage for demo purposes
-// In a real application, you would use a database
 const products: Product[] = [
   {
     id: "1",

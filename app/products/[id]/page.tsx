@@ -2,17 +2,22 @@ import { notFound } from "next/navigation"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { headers } from "next/headers"
 import { Star, ShoppingCart, Heart, Share2, Truck, Shield, RotateCcw } from "lucide-react"
 import Link from "next/link"
 
 async function getProduct(id: string) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/products/${id}`, {
+    const host = (await headers()).get("host")
+    const protocol = process.env.NODE_ENV === "production" ? "https" : "http"
+    const res = await fetch(`${protocol}://${host}/api/products/${id}`, {
       cache: "no-store",
     })
+
     if (!res.ok) return null
     return res.json()
   } catch (error) {
+    console.error("Error fetching product:", error)
     return null
   }
 }
